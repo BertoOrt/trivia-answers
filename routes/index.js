@@ -16,7 +16,9 @@ router.post('/delete', function(req, res, next) {
 
 router.post('/answer', function(req, res, next) {
   res.cookie('team', req.body.team);
-  answers.update({team: req.body.team}, {team: req.body.team, answer: req.body.answer}, {upsert: true});
+  // answers.update({team: req.body.team}, {team: req.body.team, answer: req.body.answer}, {upsert: true});
+  answers.remove({team: req.body.team});
+  answers.insert({team: req.body.team, answer: req.body.answer});
   res.redirect('/');
 });
 
