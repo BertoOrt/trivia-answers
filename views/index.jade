@@ -20,12 +20,16 @@ block content
                   td=answer.answer
       form(action="/delete", method="post")
         input.delete.btn.btn-danger(type="submit", value="delete")
+    else
+      p No answers
   .show_your
     form(action="/answer", method="post")
-      label Team Name: 
-        input(type="text", name="team", value=(team ? team : undefined))
-      label Answer: 
-        input(type="text", name="answer")
+      p
+        label Team Name: 
+          input(type="text", name="team", value=(team ? team : undefined))
+      p
+        label Answer: 
+          input(type="text", name="answer")
       p
         input.submit.btn.btn-warning(type="submit", value="submit")
   
