@@ -7,12 +7,42 @@ a {
   color: #00B7FF;
 }
 
+table {
+  width: 100%;
+}
+
+th {
+  background: orange;
+  color: white;
+  padding: 2%;
+  text-align: center;
+}
+
+td {
+  padding: 2%;
+}
+
+tr:nth-child(even) {
+  background: lightblue;
+}
+
+.table {
+  width: 100%;
+}
+
 .nav {
   margin: 4%;
 }
 
 .show_your {
-  visibility: hidden;
+  display: none;
+  margin-left: 2%;
+}
+
+.show_all {
+  display: inline-block;
+  width: 50%;
+  margin-left: 2%;
 }
 
 .all {

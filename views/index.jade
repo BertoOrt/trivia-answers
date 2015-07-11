@@ -6,17 +6,28 @@ block content
     input.all.btn.btn-primary(type="button" value="All")
     input.your.btn.btn-primary(type="button" value="Your answer")
   .show_all
-    if answers
-      for answer in answer
-        p= answer
+    if answers[0]
+      .table
+          table
+            thead
+              tr
+                th Team
+                th Answer
+            tbody
+              for answer in answers
+                tr
+                  td=answer.team
+                  td=answer.answer
       form(action="/delete", method="post")
         input.delete.btn.btn-danger(type="submit", value="delete")
   .show_your
     form(action="/answer", method="post")
+      label Team Name: 
+        input(type="text", name="team", value=(team ? team : undefined))
       label Answer: 
         input(type="text", name="answer")
       p
-        input.submit.btn.btn-primary(type="submit", value="submit")
+        input.submit.btn.btn-warning(type="submit", value="submit")
   
       
   
