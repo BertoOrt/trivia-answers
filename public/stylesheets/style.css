@@ -1,0 +1,24 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.nav {
+  margin: 4%;
+}
+
+.show_your {
+  visibility: hidden;
+}
+
+.all {
+  margin-right: 1%;
+}
+
+.delete, .submit {
+  margin-top: 1%;
+}

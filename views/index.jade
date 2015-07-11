@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  .nav
+    input.all.btn.btn-primary(type="button" value="All")
+    input.your.btn.btn-primary(type="button" value="Your answer")
+  .show_all
+    if answers
+      for answer in answer
+        p= answer
+      form(action="/delete", method="post")
+        input.delete.btn.btn-danger(type="submit", value="delete")
+  .show_your
+    form(action="/answer", method="post")
+      label Answer: 
+        input(type="text", name="answer")
+      p
+        input.submit.btn.btn-primary(type="submit", value="submit")
+  
+      
+  
