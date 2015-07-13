@@ -3,35 +3,61 @@ extends layout
 block content
   h1= title
   .nav
-    input.all.btn.btn-primary(type="button" value="All")
-    input.your.btn.btn-primary(type="button" value="Your answer")
+    input.score.btn.btn-primary(type="button" value="Score board")
+    if team !== 'martha'
+      input.your.btn.btn-primary(type="button" value="Your answer")
+    else
+      input.all.btn.btn-primary(type="button" value="Answers")
+    form.switch(action='/logout' method='post')
+      input.switchteam.btn.btn-info(type="submit" value="Switch Team")
+    if team !== 'martha'
+      H3 Go !{team}!
   .show_all
+    if answers[0]
+      if answers[0].answer
+        form.block(action='/score' method="post")
+          table
+            thead
+              tr
+                th Team
+                th Answer
+                th Points
+            tbody
+              for answer, index in answers
+                tr
+                  td
+                    input.clear(type="text", name=index+100, value=answer.team)
+                  td=answer.answer
+                  td.pointtd
+                    input.points(type="number" name=index)
+          input.submitscore.btn.btn-success(type="submit", value="submit scores and clear")
+        form(action="/clear", method="post")
+          input.delete.btn.btn-danger(type="submit", value="clear")
+    else
+      p No answers
+  .show_your
+    form(action="/answer", method="post")
+      p
+        label Answer: 
+          input(type="text", name="answer")
+      p
+        input.submit.btn.btn-warning(type="submit", value="submit")
+  .score_board
     if answers[0]
       .table
           table
             thead
               tr
                 th Team
-                th Answer
+                th Score
             tbody
               for answer in answers
                 tr
                   td=answer.team
-                  td=answer.answer
-      form(action="/delete", method="post")
-        input.delete.btn.btn-danger(type="submit", value="delete")
+                  td=answer.score
+      if team === 'martha'
+        form(action="/delete" method="post")
+          input.delete.btn.btn-danger(type='submit' value="clear teams")
     else
-      p No answers
-  .show_your
-    form(action="/answer", method="post")
-      p
-        label Team Name: 
-          input(type="text", name="team", value=(team ? team : undefined))
-      p
-        label Answer: 
-          input(type="text", name="answer")
-      p
-        input.submit.btn.btn-warning(type="submit", value="submit")
-  
-      
+      p No teams
   

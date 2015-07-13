@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  .nav
+    form(action='/login', method="post")
+      lable Team Name: 
+        input.teamname(type='text' name="team")
+      p
+        input.play.btn.btn-warning(type="submit", value="play")
+  
+  

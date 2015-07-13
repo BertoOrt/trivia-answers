@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+form {
+  display: inline-block;
+}
+
 table {
   width: 100%;
 }
@@ -20,10 +24,19 @@ th {
 
 td {
   padding: 2%;
+  text-align: center;
 }
 
 tr:nth-child(even) {
   background: lightblue;
+}
+
+h3 {
+  display: inline-block;
+}
+
+.pointtd {
+  width: 30%;
 }
 
 .table {
@@ -39,16 +52,40 @@ tr:nth-child(even) {
   margin-left: 2%;
 }
 
-.show_all {
+.score_board {
   display: inline-block;
   width: 50%;
   margin-left: 2%;
 }
 
-.all {
+.show_all {
+  display: none;
+  width: 50%;
+  margin-left: 2%;
+}
+
+.all, .score, .switch, .your {
   margin-right: 1%;
 }
 
-.delete, .submit {
-  margin-top: 1%;
+.delete, .submit, .play {
+  margin-top: 5%;
+}
+
+.block {
+  display: block;
+}
+
+.submitscore {
+  margin-right: 1%;
+  margin-top: 2%;
+}
+
+.points {
+  width: 40%;
+}
+
+.clear {
+  border: none;
+  background: none;
 }
