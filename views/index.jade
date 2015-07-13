@@ -56,7 +56,7 @@ block content
               for answer in answers
                 tr
                   td=answer.team
-                  td=answer.score
+                  td=answer.score === undefined ? 0 : answer.score
       if team === 'martharocks'
         form(action="/delete" method="post")
           input.delete.btn.btn-danger(type='submit' value="clear teams")
