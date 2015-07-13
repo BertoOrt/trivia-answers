@@ -4,17 +4,17 @@ block content
   h1= title
   .nav
     input.score.btn.btn-primary(type="button" value="Score board")
-    if team !== 'martha'
+    if team !== 'martharocks'
       input.your.btn.btn-primary(type="button" value="Your answer")
     else
       input.all.btn.btn-primary(type="button" value="Answers")
     form.switch(action='/logout' method='post')
-      input.switchteam.btn.btn-info(type="submit" value="Switch Team")
-    if team !== 'martha'
+      input.switchteam.btn.btn-info(type="submit" value=(team === 'martharocks' ? "logout": "Switch team"))
+    if team !== 'martharocks'
       H3 Go !{team}!
   .show_all
     if answers[0]
-      if answers[0].answer
+      if answer !== undefined
         form.block(action='/score' method="post")
           table
             thead
@@ -33,6 +33,8 @@ block content
           input.submitscore.btn.btn-success(type="submit", value="submit scores and clear")
         form(action="/clear", method="post")
           input.delete.btn.btn-danger(type="submit", value="clear")
+      else
+        p No answers
     else
       p No answers
   .show_your
@@ -55,7 +57,7 @@ block content
                 tr
                   td=answer.team
                   td=answer.score
-      if team === 'martha'
+      if team === 'martharocks'
         form(action="/delete" method="post")
           input.delete.btn.btn-danger(type='submit' value="clear teams")
     else

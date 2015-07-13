@@ -8,7 +8,11 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-  res.cookie('team', req.body.team);
+  var team = req.body.team;
+  if (req.body.team === "") {
+    team = "team that should not be named"
+  }
+  res.cookie('team', team);
   res.redirect('/');
 });
 
@@ -23,7 +27,13 @@ router.use(function (req, res, next) {
 
 router.get('/', function(req, res, next) {
   answers.find({}, function (err, data) {
-    res.render('index', { title: 'Trivia Answers', answers: data, team: req.cookies.team });
+    var answer;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].answer !== "") {
+        answer = true
+      }
+    }
+    res.render('index', { title: 'Trivia Answers', answers: data, answer: answer, team: req.cookies.team });
   })
 });
 
@@ -47,19 +57,15 @@ router.post('/score', function(req, res, next) {
     for (var i = 0; i < data.length; i++) {
       var teamNumber = i+100;
       var team = req.body[teamNumber];
-      answers.findOne({team: team}, function (err, teamData) {
-        console.log(i);
-        console.log(teamData,req.body[i], teamData.score, teamData.team, 'second');
-        var point = teamData.score;
-        if (teamData.score === undefined) {
-          point = 0
-        }
-        var points = point + req.body[i];
-        answers.update({team: team}, {$set: {score: 0}})
-      })
+      var point = data[i].score;
+      if (data[i].score === undefined) {
+        point = 0
+      }
+      var points = point + Number(req.body[i]);
+      answers.update({team: team}, {$set: {score: points}})
     }
   })
-  // answers.update({}, { $set: {answer: ""}}, {multi: true});
+  answers.update({}, { $set: {answer: ""}}, {multi: true});
   res.redirect('/');
 });
 
